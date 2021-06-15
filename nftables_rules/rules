@@ -1,0 +1,9 @@
+
+add table bridge mangle
+add chain bridge mangle POSTROUTING { type filter hook postrouting priority -150; policy accept; }
+add rule bridge mangle POSTROUTING ether type 0x8100 vlan id 5 vlan pcp 3 counter meta priority set 100:2
+add rule bridge mangle POSTROUTING ether type 0x8100 vlan id 5 vlan pcp 2 counter meta priority set 100:1
+add rule bridge mangle POSTROUTING ip daddr 192.168.1.40 udp sport 6666 counter meta priority set 100:0
+add rule bridge mangle POSTROUTING ip daddr 192.168.1.40 udp sport 7777 counter meta priority set 100:0
+add rule bridge mangle POSTROUTING ip daddr 224.0.1.129 udp dport 319 counter meta priority set 100:3
+add rule bridge mangle POSTROUTING ip daddr 224.0.1.129 udp dport 320 counter meta priority set 100:3
